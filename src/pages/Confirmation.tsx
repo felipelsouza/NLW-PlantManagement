@@ -1,13 +1,5 @@
-import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 import { Button } from '../components/Button';
 
 import colors from '../styles/colors';

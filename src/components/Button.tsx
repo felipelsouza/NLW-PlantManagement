@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
