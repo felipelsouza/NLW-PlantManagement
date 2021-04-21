@@ -37,7 +37,6 @@ export function PlantSelect() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(true);
-  const [loadedAll, setLoadedAll] = useState(false);
 
   const navigation = useNavigation();
 
@@ -57,18 +56,15 @@ export function PlantSelect() {
   const fetchPlants = async () => {
     const { data } = await api.get(`/plants?_sort=name&order=asc&_page=${page}&_limit=8`);
 
-    if (!data) return setLoadedAll(true);
-
     if (page > 1) {
       setPlants((oldValue) => [...oldValue, ...data]);
       setFilteredPlants((oldValue) => [...oldValue, ...data]);
     } else {
       setPlants(data);
       setFilteredPlants(data);
-
-      setLoading(false);
-      setLoadingMore(false);
     }
+    setLoading(false);
+    setLoadingMore(false);
   };
 
   const handleFetchMore = (distance: number) => {
