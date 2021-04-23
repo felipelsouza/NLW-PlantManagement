@@ -19,7 +19,7 @@ export function Confirmation() {
         <Text style={styles.emoji}>😄</Text>
         <Text style={styles.title}>Prontinho</Text>
         <Text style={styles.subtitle}>
-          Agora vamos começar a cuidar das suas plantinhas com muito cuidado.
+          Agora vamos começar a cuidar das suas plantinhas.
         </Text>
         <View style={styles.footer}>
           <Button title="Começar" onPress={handleMoveOn} />

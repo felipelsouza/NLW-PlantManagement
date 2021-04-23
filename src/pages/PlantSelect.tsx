@@ -17,7 +17,7 @@ interface EnvironmentProps {
 }
 
 interface PlantProps {
-  id: number;
+  id: string;
   name: string;
   about: string;
   water_tips: string;
@@ -99,10 +99,10 @@ export function PlantSelect() {
       <View>
         <FlatList
           data={environments}
+          keyExtractor={(item) => String(item.key)}
           renderItem={({ item }) => (
             <EnvironmentButton
               title={item.title}
-              key={item.key}
               active={item.key === environmentSelected ? true : false}
               onPress={() => handleEnvironmentSelected(item.key)}
             />
@@ -116,7 +116,8 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filteredPlants}
-          renderItem={({ item }) => <PlantCardPrimary data={item} key={item.id} />}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => <PlantCardPrimary data={item} />}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}
