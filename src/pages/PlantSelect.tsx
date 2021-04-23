@@ -86,6 +86,10 @@ export function PlantSelect() {
     return setFilteredPlants(filtered);
   };
 
+  const handlePlantSelected = (plant: PlantProps) => {
+    navigation.navigate('PlantSave', { plant });
+  };
+
   if (loading) return <Load />;
 
   return (
@@ -117,7 +121,9 @@ export function PlantSelect() {
         <FlatList
           data={filteredPlants}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <PlantCardPrimary data={item} />}
+          renderItem={({ item }) => (
+            <PlantCardPrimary data={item} onPress={() => handlePlantSelected(item)} />
+          )}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}
