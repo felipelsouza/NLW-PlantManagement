@@ -11,8 +11,9 @@ import {
 import { SvgFromUri } from 'react-native-svg';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { useRoute } from '@react-navigation/core';
-import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
+import { loadPlant, PlantProps, savePlant } from '../libs/storage';
 
 import { Button } from '../components/Button';
 
@@ -22,18 +23,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 interface Params {
-  plant: {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-      times: number;
-      repeat_every: string;
-    };
-  };
+  plant: PlantProps;
 }
 
 export function PlantSave() {
@@ -43,7 +33,7 @@ export function PlantSave() {
   const route = useRoute();
   const { plant } = route.params as Params;
 
-  const handleChangeTime = (event: Event, dateTime: Date | undefined) => {
+  const handleChangeTime = (_: any, dateTime: Date | undefined) => {
     if (Platform.OS === 'android') setShowDatePicker((oldState) => !oldState);
 
     if (dateTime && isBefore(dateTime, new Date())) {
@@ -56,6 +46,17 @@ export function PlantSave() {
 
   const handleOpenDateTimePickerForAndroid = () => {
     setShowDatePicker((oldState) => !oldState);
+  };
+
+  const handleSave = async () => {
+    try {
+      await savePlant({
+        ...plant,
+        dateTimeNotification: selectedDateTime,
+      });
+    } catch {
+      Alert.alert('Não foi possível salvar. 😢');
+    }
   };
 
   return (
@@ -79,7 +80,7 @@ export function PlantSave() {
           <DateTimePicker
             value={selectedDateTime}
             mode="time"
-            display="spinner"
+            display="clock"
             onChange={handleChangeTime}
           />
         )}
@@ -95,7 +96,7 @@ export function PlantSave() {
           </TouchableOpacity>
         )}
 
-        <Button title="Cadastrar planta" onPress={() => {}} />
+        <Button title="Cadastrar planta" onPress={handleSave} />
       </View>
     </View>
   );
