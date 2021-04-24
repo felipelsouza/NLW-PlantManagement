@@ -13,7 +13,7 @@ import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { useRoute, useNavigation } from '@react-navigation/core';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
-import { loadPlant, PlantProps, savePlant } from '../libs/storage';
+import { PlantProps, savePlant } from '../libs/storage';
 
 import { Button } from '../components/Button';
 
